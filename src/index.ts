@@ -5,6 +5,7 @@ import { registerMailListAccounts } from "./tools/list-accounts.js";
 import { registerMailListFolders } from "./tools/list-folders.js";
 import { registerMailSearchMessages } from "./tools/search-messages.js";
 import { registerMailGetMessage } from "./tools/get-message.js";
+import { registerMailGetAttachment } from "./tools/get-attachment.js";
 
 async function main() {
   // Falha rápido e com mensagem acionável se accounts.json estiver ausente/inválido.
@@ -19,7 +20,7 @@ async function main() {
   registerMailListFolders(server);
   registerMailSearchMessages(server);
   registerMailGetMessage(server);
-  // mail_get_attachment é registrada aqui conforme implementada — ver Issue #9.
+  registerMailGetAttachment(server);
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
