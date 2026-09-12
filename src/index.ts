@@ -4,6 +4,7 @@ import { loadAccountsConfig } from "./config.js";
 import { registerMailListAccounts } from "./tools/list-accounts.js";
 import { registerMailListFolders } from "./tools/list-folders.js";
 import { registerMailSearchMessages } from "./tools/search-messages.js";
+import { registerMailGetMessage } from "./tools/get-message.js";
 
 async function main() {
   // Falha rápido e com mensagem acionável se accounts.json estiver ausente/inválido.
@@ -17,8 +18,8 @@ async function main() {
   registerMailListAccounts(server);
   registerMailListFolders(server);
   registerMailSearchMessages(server);
-  // Demais tools de leitura (mail_get_message, mail_get_attachment) são
-  // registradas aqui conforme implementadas — ver Issues #8, #9.
+  registerMailGetMessage(server);
+  // mail_get_attachment é registrada aqui conforme implementada — ver Issue #9.
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
