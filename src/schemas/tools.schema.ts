@@ -110,3 +110,39 @@ export const MailGetAttachmentInputSchema = z
   .strict();
 
 export type MailGetAttachmentInput = z.infer<typeof MailGetAttachmentInputSchema>;
+
+export const MailSendMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada (precisa ter bloco 'smtp' em accounts.json) usada para enviar o email."),
+    to: z
+      .string()
+      .min(1)
+      .describe("Endereço(s) de destino, separados por vírgula se houver mais de um."),
+    cc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia, separados por vírgula se houver mais de um."),
+    bcc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia oculta, separados por vírgula se houver mais de um."),
+    subject: z.string().min(1).describe("Assunto do email."),
+    bodyText: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo do email em texto plano. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+    bodyHtml: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo do email em HTML. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+  })
+  .strict();
+
+export type MailSendMessageInput = z.infer<typeof MailSendMessageInputSchema>;
