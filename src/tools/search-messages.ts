@@ -100,19 +100,26 @@ export function registerMailSearchMessages(server: McpServer): void {
         }
       });
 
-      let text = JSON.stringify(messages, null, 2);
-      let truncated = false;
-      if (text.length > CHARACTER_LIMIT) {
-        text = text.slice(0, CHARACTER_LIMIT);
-        truncated = true;
+      // Trunca por item (não pela string serializada) para nunca devolver JSON inválido.
+      let visibleCount = messages.length;
+      while (
+        visibleCount > 0 &&
+        JSON.stringify(messages.slice(0, visibleCount), null, 2).length > CHARACTER_LIMIT
+      ) {
+        visibleCount -= 1;
       }
+
+      const truncated = visibleCount < messages.length;
+      const text = JSON.stringify(messages.slice(0, visibleCount), null, 2);
 
       return {
         content: [
           {
             type: "text",
             text: truncated
-              ? `${text}\n\n[... resposta truncada em ${CHARACTER_LIMIT} caracteres — refine os filtros ou reduza "limit" ...]`
+              ? `${text}\n\n[... ${
+                  messages.length - visibleCount
+                } mensagem(ns) omitida(s) para respeitar o limite de ${CHARACTER_LIMIT} caracteres — refine os filtros ou reduza "limit" ...]`
               : text,
           },
         ],
