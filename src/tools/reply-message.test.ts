@@ -131,6 +131,24 @@ describe("mail_reply_message", () => {
     expect(message.subject).toBe("Re: Assunto original");
   });
 
+  it("não envia references vazio quando a mensagem original não tem Message-ID (regressão)", async () => {
+    const rawWithoutMessageId = buildRawEmail()
+      .split("\r\n")
+      .filter((line) => !line.startsWith("Message-ID:"))
+      .join("\r\n");
+    mockImapClient.download.mockResolvedValue(downloadObjectFor(rawWithoutMessageId));
+
+    const client = await connectedClient();
+    await client.callTool({
+      name: "mail_reply_message",
+      arguments: { accountId: "gmail-principal", folder: "INBOX", uid: 42, bodyText: "Resposta" },
+    });
+
+    const [, message] = mockSendViaSmtp.mock.calls[0];
+    expect(message.references).toBeUndefined();
+    expect(message.inReplyTo).toBeUndefined();
+  });
+
   it("retorna erro acionável quando accountId não existe", async () => {
     const client = await connectedClient();
     const result = await client.callTool({

@@ -4,7 +4,7 @@
 
 | Termo | Significado |
 |---|---|
-| Account (Conta) | Entrada em `config/accounts.json`: credenciais e config de conexão IMAP de uma caixa de email (Gmail via App Password, ou Speedmail). Única entidade persistida localmente. |
+| Account (Conta) | Entrada em `config/accounts.json`: credenciais e config de conexão IMAP (+ SMTP opcional, para envio) de uma caixa de email (Gmail via App Password, ou Speedmail). Única entidade persistida localmente. |
 | Folder (Pasta) | Mailbox IMAP remota (ex: INBOX, Sent). Obtida em tempo real via `imapflow`, não persistida. |
 | Message (Mensagem) | Email individual dentro de uma Folder, identificado por UID IMAP. Parseado sob demanda via `mailparser`. |
 | Attachment (Anexo) | Arquivo anexado a uma Message, identificado por `filename`/`partId`. Conteúdo binário obtido sob demanda. |
@@ -14,7 +14,11 @@
 ## Decisões arquiteturais chave
 
 - **Somente leitura na v1**: reduz blast radius de erro de config ou prompt
-  injection vindo de conteúdo de email malicioso. Envio/escrita fica para v2.
+  injection vindo de conteúdo de email malicioso.
+- **Envio e escrita na v2** (ver [ADR 0002](docs/adr/0002-escrita-e-envio-v2.md)):
+  bloco `smtp` opcional em accounts.json, `mail_delete_message` exige
+  `confirm: true` explícito no schema (rejeitado antes de qualquer lógica
+  rodar), `mail_delete_message`/`mail_move_message` com `destructiveHint: true`.
 - **App Password em vez de OAuth2**: simplicidade de configuração agora;
   Speedmail já é IMAP/SMTP puro por natureza. OAuth2 fica documentado como
   evolução futura.

@@ -81,18 +81,18 @@ export function registerMailReplyMessage(server: McpServer): void {
 
       const finalText = bodyText !== undefined ? `${bodyText}\n\n${quotedText}` : undefined;
 
+      const referencesList = [
+        ...(Array.isArray(original.references) ? original.references : original.references ? [original.references] : []),
+        original.messageId,
+      ].filter((v): v is string => Boolean(v));
+
       await sendViaSmtp(account, {
         to: replyTo,
         subject: replySubject,
         text: finalText,
         html: bodyHtml,
         inReplyTo: original.messageId,
-        references: [
-          ...(Array.isArray(original.references) ? original.references : original.references ? [original.references] : []),
-          original.messageId,
-        ]
-          .filter((v): v is string => Boolean(v))
-          .join(" "),
+        references: referencesList.length > 0 ? referencesList.join(" ") : undefined,
       });
 
       return {
