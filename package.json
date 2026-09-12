@@ -1,7 +1,7 @@
 {
   "name": "mcpmail",
   "version": "0.1.0",
-  "description": "Servidor MCP de leitura de email multi-conta (Gmail App Password + IMAP genérico)",
+  "description": "Servidor MCP de email multi-conta (Gmail App Password + IMAP/SMTP genérico) — leitura, envio e escrita",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -19,12 +19,14 @@
     "@modelcontextprotocol/sdk": "1.30.0",
     "imapflow": "1.7.8",
     "mailparser": "3.9.25",
+    "nodemailer": "10.0.8",
     "sanitize-html": "2.17.7",
     "zod": "3.25.76"
   },
   "devDependencies": {
     "@types/mailparser": "3.4.6",
     "@types/node": "22.15.30",
+    "@types/nodemailer": "8.0.1",
     "@types/sanitize-html": "2.16.1",
     "typescript": "5.9.3",
     "vitest": "3.2.7"

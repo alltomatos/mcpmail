@@ -110,3 +110,200 @@ export const MailGetAttachmentInputSchema = z
   .strict();
 
 export type MailGetAttachmentInput = z.infer<typeof MailGetAttachmentInputSchema>;
+
+export const MailSendMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada (precisa ter bloco 'smtp' em accounts.json) usada para enviar o email."),
+    to: z
+      .string()
+      .min(1)
+      .describe("Endereço(s) de destino, separados por vírgula se houver mais de um."),
+    cc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia, separados por vírgula se houver mais de um."),
+    bcc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia oculta, separados por vírgula se houver mais de um."),
+    subject: z.string().min(1).describe("Assunto do email."),
+    bodyText: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo do email em texto plano. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+    bodyHtml: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo do email em HTML. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+  })
+  .strict();
+
+export type MailSendMessageInput = z.infer<typeof MailSendMessageInputSchema>;
+
+export const MailMarkMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada onde a mensagem está armazenada."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Caminho da pasta/mailbox onde a mensagem se encontra (ex: 'INBOX')."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem a ser marcada."),
+    seen: z
+      .boolean()
+      .optional()
+      .describe("Se true, marca como lida; se false, marca como não lida. Pelo menos um entre seen/flagged é obrigatório."),
+    flagged: z
+      .boolean()
+      .optional()
+      .describe("Se true, adiciona a flag de destaque (\\Flagged); se false, remove. Pelo menos um entre seen/flagged é obrigatório."),
+  })
+  .strict();
+
+export type MailMarkMessageInput = z.infer<typeof MailMarkMessageInputSchema>;
+
+export const MailMoveMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada onde a mensagem está armazenada."),
+    sourceFolder: z
+      .string()
+      .min(1)
+      .describe("Pasta de origem onde a mensagem se encontra atualmente."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem a ser movida."),
+    targetFolder: z
+      .string()
+      .min(1)
+      .describe("Pasta de destino para onde a mensagem será movida."),
+  })
+  .strict();
+
+export type MailMoveMessageInput = z.infer<typeof MailMoveMessageInputSchema>;
+
+export const MailDeleteMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada onde a mensagem está armazenada."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Pasta/mailbox onde a mensagem se encontra."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem a ser deletada."),
+    confirm: z
+      .literal(true)
+      .describe(
+        "Confirmação explícita e obrigatória: deve ser exatamente `true` para a exclusão (irreversível) ser aceita. Sem este campo, a chamada é rejeitada antes de qualquer ação."
+      ),
+  })
+  .strict();
+
+export type MailDeleteMessageInput = z.infer<typeof MailDeleteMessageInputSchema>;
+
+export const MailReplyMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada (precisa ter bloco 'smtp' em accounts.json) usada para responder."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Pasta/mailbox onde a mensagem original se encontra."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem original a ser respondida."),
+    to: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) de destino da resposta; se omitido, responde ao remetente original."),
+    subject: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Assunto da resposta; se omitido, deriva 'Re: <assunto original>' automaticamente."),
+    bodyText: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo da resposta em texto plano. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+    bodyHtml: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo da resposta em HTML. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+  })
+  .strict();
+
+export type MailReplyMessageInput = z.infer<typeof MailReplyMessageInputSchema>;
+
+export const MailForwardMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada (precisa ter bloco 'smtp' em accounts.json) usada para encaminhar."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Pasta/mailbox onde a mensagem original se encontra."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem original a ser encaminhada."),
+    to: z
+      .string()
+      .min(1)
+      .describe("Endereço(s) de destino do encaminhamento, separados por vírgula se houver mais de um."),
+    cc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia, separados por vírgula se houver mais de um."),
+    bcc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia oculta, separados por vírgula se houver mais de um."),
+    subject: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Assunto do encaminhamento; se omitido, deriva 'Fwd: <assunto original>' automaticamente."),
+    bodyText: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Comentário adicional em texto plano, incluído antes da mensagem original citada."),
+  })
+  .strict();
+
+export type MailForwardMessageInput = z.infer<typeof MailForwardMessageInputSchema>;
