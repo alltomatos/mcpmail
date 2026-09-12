@@ -39,7 +39,7 @@ O servidor comunica via stdio (transporte `StdioServerTransport`), pensado
 para rodar como subprocess do Claude Code:
 
 ```bash
-claude mcp add mail-mcp-server -- node /caminho/absoluto/dist/index.js
+claude mcp add mcpmail -- node /caminho/absoluto/dist/index.js
 ```
 
 ## Tools disponíveis (v1)
