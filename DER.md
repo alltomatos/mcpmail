@@ -1,8 +1,8 @@
-# Diagrama de Entidade-Relacionamento (DER) — mail-mcp-server
+# Diagrama de Entidade-Relacionamento (DER) — mcpmail
 
 ## Contexto
 
-O `mail-mcp-server` não utiliza um banco de dados relacional tradicional. O
+O `mcpmail` não utiliza um banco de dados relacional tradicional. O
 modelo abaixo representa o **fluxo lógico de dados** do sistema:
 
 - **Account (Conta)** é a única entidade verdadeiramente persistida — carregada

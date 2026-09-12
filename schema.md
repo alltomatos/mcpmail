@@ -1,4 +1,4 @@
-# Schemas de Dados e Validação (Zod) — mail-mcp-server
+# Schemas de Dados e Validação (Zod) — mcpmail
 
 ## Convenções obrigatórias
 

@@ -6,7 +6,7 @@ Aceito
 
 ## Contexto
 
-O `mail-mcp-server` precisa suportar múltiplas contas de email (Gmail +
+O `mcpmail` precisa suportar múltiplas contas de email (Gmail +
 Speedmail) para leitura via um servidor MCP local. O conector Gmail nativo
 disponível no ambiente cobre apenas uma conta via OAuth2, o que não atende ao
 caso de múltiplas contas Gmail nem a um provedor IMAP genérico como o

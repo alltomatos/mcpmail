@@ -1,4 +1,4 @@
-# Domínio — mail-mcp-server
+# Domínio — mcpmail
 
 Ver [CONTEXT.md](../../CONTEXT.md) para a tabela de vocabulário de domínio
 (Account, Folder, Message, Attachment, App Password, Provider) e decisões
