@@ -1,4 +1,4 @@
-# DEVELOPER-ROADMAP.md — mail-mcp-server
+# DEVELOPER-ROADMAP.md — mcpmail
 
 Bússola estratégica do projeto. Cada Epic tem um GitHub Issue como fonte
 detalhada de contexto, critérios de aceite e status.

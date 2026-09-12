@@ -1,4 +1,4 @@
-# mail-mcp-server
+# mcpmail
 
 Servidor MCP (Model Context Protocol) de leitura de email multi-conta —
 Gmail (via App Password) e provedores IMAP genéricos (ex: Speedmail).

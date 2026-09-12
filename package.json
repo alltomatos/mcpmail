@@ -1,11 +1,11 @@
 {
-  "name": "mail-mcp-server",
+  "name": "mcpmail",
   "version": "0.1.0",
   "description": "Servidor MCP de leitura de email multi-conta (Gmail App Password + IMAP genérico)",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "mail-mcp-server": "dist/index.js"
+    "mcpmail": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",

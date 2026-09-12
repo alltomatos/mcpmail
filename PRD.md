@@ -16,7 +16,7 @@ Rodar local, nesta máquina (Rust/Node já disponíveis; sem Docker, sem servido
 Escopo mínimo de v1 (5 tools de leitura): listar contas, listar pastas, buscar mensagens, ler mensagem completa, baixar anexo.
 O que será construído
 
-Um novo repositório mail-mcp-server (TypeScript), com:
+Um novo repositório mcpmail (TypeScript), com:
 
 Config de contas: arquivo config/accounts.json (gitignored, com config/accounts.example.json versionado como template) — cada entrada com {id, label, provider, host, port, secure, user, appPassword}. Não usar variáveis de ambiente individuais por conta (ficaria inviável com N contas) — env var única MAIL_MCP_ACCOUNTS_PATH aponta pro arquivo (default ./config/accounts.json).
 Cliente IMAP compartilhado (src/services/imap-client.ts): usa imapflow para conectar/listar pastas/buscar/baixar, com pool de conexão simples por conta (uma conexão por chamada de tool, fechada ao final — sem pool persistente na v1, para simplicidade).
@@ -31,7 +31,7 @@ Todas as tools com annotations: { readOnlyHint: true, destructiveHint: false, id
 Truncamento de resposta (CHARACTER_LIMIT) para não estourar contexto em caixas de entrada grandes.
 Erros acionáveis: falha de auth aponta para checar accounts.json; timeout de conexão sugere checar host/porta.
 Estrutura do projeto
-mail-mcp-server/
+mcpmail/
 ├── package.json
 ├── tsconfig.json
 ├── README.md

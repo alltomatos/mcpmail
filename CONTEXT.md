@@ -1,4 +1,4 @@
-# CONTEXT.md — mail-mcp-server
+# CONTEXT.md — mcpmail
 
 ## Linguagem de domínio
 

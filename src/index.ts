@@ -12,7 +12,7 @@ async function main() {
   loadAccountsConfig();
 
   const server = new McpServer({
-    name: "mail-mcp-server",
+    name: "mcpmail",
     version: "0.1.0",
   });
 
@@ -27,6 +27,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(`[mail-mcp-server] erro fatal: ${(err as Error).message}`);
+  console.error(`[mcpmail] erro fatal: ${(err as Error).message}`);
   process.exit(1);
 });

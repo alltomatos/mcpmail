@@ -1,4 +1,4 @@
-# AGENTS.md — mail-mcp-server
+# AGENTS.md — mcpmail
 
 ## Visão geral
 
