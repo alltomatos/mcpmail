@@ -7,7 +7,12 @@
     "port": 993,
     "secure": true,
     "user": "usuario@gmail.com",
-    "appPassword": "xxxxxxxxxxxxxxxx"
+    "appPassword": "xxxxxxxxxxxxxxxx",
+    "smtp": {
+      "host": "smtp.gmail.com",
+      "port": 587,
+      "secure": false
+    }
   },
   {
     "id": "speedmail-trabalho",
