@@ -1,0 +1,22 @@
+[
+  {
+    "id": "gmail-principal",
+    "label": "Gmail Pessoal",
+    "provider": "gmail",
+    "host": "imap.gmail.com",
+    "port": 993,
+    "secure": true,
+    "user": "usuario@gmail.com",
+    "appPassword": "xxxxxxxxxxxxxxxx"
+  },
+  {
+    "id": "speedmail-trabalho",
+    "label": "Speedmail Trabalho",
+    "provider": "speedmail",
+    "host": "imap.speedmail.com",
+    "port": 993,
+    "secure": true,
+    "user": "usuario@speedmail.com",
+    "appPassword": "yyyyyyyyyyyyyyyy"
+  }
+]
