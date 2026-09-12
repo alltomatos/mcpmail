@@ -223,3 +223,87 @@ export const MailDeleteMessageInputSchema = z
   .strict();
 
 export type MailDeleteMessageInput = z.infer<typeof MailDeleteMessageInputSchema>;
+
+export const MailReplyMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada (precisa ter bloco 'smtp' em accounts.json) usada para responder."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Pasta/mailbox onde a mensagem original se encontra."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem original a ser respondida."),
+    to: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) de destino da resposta; se omitido, responde ao remetente original."),
+    subject: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Assunto da resposta; se omitido, deriva 'Re: <assunto original>' automaticamente."),
+    bodyText: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo da resposta em texto plano. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+    bodyHtml: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Corpo da resposta em HTML. Pelo menos um entre bodyText/bodyHtml é obrigatório."),
+  })
+  .strict();
+
+export type MailReplyMessageInput = z.infer<typeof MailReplyMessageInputSchema>;
+
+export const MailForwardMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada (precisa ter bloco 'smtp' em accounts.json) usada para encaminhar."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Pasta/mailbox onde a mensagem original se encontra."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem original a ser encaminhada."),
+    to: z
+      .string()
+      .min(1)
+      .describe("Endereço(s) de destino do encaminhamento, separados por vírgula se houver mais de um."),
+    cc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia, separados por vírgula se houver mais de um."),
+    bcc: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Endereço(s) em cópia oculta, separados por vírgula se houver mais de um."),
+    subject: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Assunto do encaminhamento; se omitido, deriva 'Fwd: <assunto original>' automaticamente."),
+    bodyText: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Comentário adicional em texto plano, incluído antes da mensagem original citada."),
+  })
+  .strict();
+
+export type MailForwardMessageInput = z.infer<typeof MailForwardMessageInputSchema>;
