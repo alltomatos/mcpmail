@@ -146,3 +146,80 @@ export const MailSendMessageInputSchema = z
   .strict();
 
 export type MailSendMessageInput = z.infer<typeof MailSendMessageInputSchema>;
+
+export const MailMarkMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada onde a mensagem está armazenada."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Caminho da pasta/mailbox onde a mensagem se encontra (ex: 'INBOX')."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem a ser marcada."),
+    seen: z
+      .boolean()
+      .optional()
+      .describe("Se true, marca como lida; se false, marca como não lida. Pelo menos um entre seen/flagged é obrigatório."),
+    flagged: z
+      .boolean()
+      .optional()
+      .describe("Se true, adiciona a flag de destaque (\\Flagged); se false, remove. Pelo menos um entre seen/flagged é obrigatório."),
+  })
+  .strict();
+
+export type MailMarkMessageInput = z.infer<typeof MailMarkMessageInputSchema>;
+
+export const MailMoveMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada onde a mensagem está armazenada."),
+    sourceFolder: z
+      .string()
+      .min(1)
+      .describe("Pasta de origem onde a mensagem se encontra atualmente."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem a ser movida."),
+    targetFolder: z
+      .string()
+      .min(1)
+      .describe("Pasta de destino para onde a mensagem será movida."),
+  })
+  .strict();
+
+export type MailMoveMessageInput = z.infer<typeof MailMoveMessageInputSchema>;
+
+export const MailDeleteMessageInputSchema = z
+  .object({
+    accountId: z
+      .string()
+      .min(1)
+      .describe("ID da conta configurada onde a mensagem está armazenada."),
+    folder: z
+      .string()
+      .min(1)
+      .describe("Pasta/mailbox onde a mensagem se encontra."),
+    uid: z
+      .number()
+      .int()
+      .positive()
+      .describe("UID (identificador único IMAP) da mensagem a ser deletada."),
+    confirm: z
+      .literal(true)
+      .describe(
+        "Confirmação explícita e obrigatória: deve ser exatamente `true` para a exclusão (irreversível) ser aceita. Sem este campo, a chamada é rejeitada antes de qualquer ação."
+      ),
+  })
+  .strict();
+
+export type MailDeleteMessageInput = z.infer<typeof MailDeleteMessageInputSchema>;

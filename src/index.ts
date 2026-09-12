@@ -7,6 +7,9 @@ import { registerMailSearchMessages } from "./tools/search-messages.js";
 import { registerMailGetMessage } from "./tools/get-message.js";
 import { registerMailGetAttachment } from "./tools/get-attachment.js";
 import { registerMailSendMessage } from "./tools/send-message.js";
+import { registerMailMarkMessage } from "./tools/mark-message.js";
+import { registerMailMoveMessage } from "./tools/move-message.js";
+import { registerMailDeleteMessage } from "./tools/delete-message.js";
 
 async function main() {
   // Falha rápido e com mensagem acionável se accounts.json estiver ausente/inválido.
@@ -23,6 +26,9 @@ async function main() {
   registerMailGetMessage(server);
   registerMailGetAttachment(server);
   registerMailSendMessage(server);
+  registerMailMarkMessage(server);
+  registerMailMoveMessage(server);
+  registerMailDeleteMessage(server);
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
